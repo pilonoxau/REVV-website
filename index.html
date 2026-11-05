@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>revvongambles | Bonuses &amp; VIP Rewards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* ---- EDIT COLORS HERE ---- */
+    --accent: #7c4dff;          /* purple buttons */
+    --accent-hover: #926bff;
+    --panel: rgba(32, 22, 78, 0.92);   /* purple table rows */
+    --panel-head: rgba(14, 8, 38, 0.92); /* top nav */
+    --text: #ffffff;
+    --muted: #b7a9f0;
+    --glow: #ff1a2e;            /* red glow */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Outfit", system-ui, sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.55)),
+      url("preview.webp") center top / cover no-repeat fixed,
+      radial-gradient(ellipse at 50% 100%, #8a0010 0%, #2a0007 45%, #050001 100%);
+    background-color: #050001;
+  }
+
+  /* NAV */
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--panel-head);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 26, 46, .35);
+    box-shadow: 0 4px 30px rgba(255, 26, 46, .25);
+  }
+  .nav {
+    max-width: 1200px; margin: 0 auto; padding: 14px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .logo { font-weight: 800; font-size: 1.6rem; color: #fff; text-decoration: none; letter-spacing: -.5px; text-shadow: 0 0 14px rgba(255, 26, 46, .8); }
+  
+  nav ul { display: flex; gap: 22px; list-style: none; flex-wrap: wrap; justify-content: center; }
+  nav a { color: var(--muted); text-decoration: none; font-weight: 700; font-size: .85rem; text-transform: uppercase; }
+  nav a:hover, nav a.active { color: #fff; }
+  .socials { display: flex; gap: 8px; align-items: center; }
+  .socials a {
+    background: rgba(124, 77, 255, .35); color: #fff; text-decoration: none;
+    padding: 8px 12px; border-radius: 999px; font-size: .8rem; font-weight: 600;
+  }
+  .socials a:hover { background: var(--accent); }
+
+  /* HERO */
+  .hero { text-align: center; padding: 70px 20px 40px; }
+  .hero h1 {
+    font-size: clamp(2.6rem, 8vw, 5rem); font-weight: 800; letter-spacing: -1px;
+    text-shadow: 0 0 30px rgba(255, 26, 46, .7);
+  }
+  .hero p { color: #e5dcff; margin-top: 10px; }
+  .code-box {
+    display: inline-flex; align-items: center; gap: 12px; margin-top: 22px;
+    background: var(--panel); border: 1px solid var(--accent);
+    border-radius: 14px; padding: 10px 14px 10px 20px;
+  }
+  .code-box b { font-size: 1.3rem; letter-spacing: 1px; }
+  .code-box button {
+    background: var(--accent); color: #fff; border: 0; border-radius: 999px;
+    padding: 8px 16px; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  .code-box button:hover { background: var(--accent-hover); }
+  .btns { display: flex; gap: 10px; justify-content: center; margin-top: 22px; flex-wrap: wrap; }
+  .btn {
+    background: var(--accent); color: #fff; text-decoration: none; font-weight: 700;
+    padding: 14px 40px; border-radius: 999px; transition: background .2s, transform .2s;
+    box-shadow: 0 0 24px rgba(124, 77, 255, .5);
+  }
+  .btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
+  :focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+  /* TABLE */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 30px 20px 60px; }
+  .row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center;
+    padding: 16px 24px; border-radius: 8px; margin-bottom: 8px;
+    background: var(--panel); border: 1px solid rgba(124, 77, 255, .25);
+  }
+  .row.head {
+    background: transparent; border: 0; color: var(--muted);
+    font-size: .75rem; font-weight: 700; text-transform: uppercase; padding-bottom: 4px;
+  }
+  .row .level { color: var(--muted); font-weight: 500; }
+  .row .wager { font-weight: 700; }
+  .row .prize { color: var(--muted); }
+
+  footer {
+    text-align: center; padding: 30px 20px 50px; color: #d9cfcf; font-size: .8rem;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,.7));
+  }
+  footer p { max-width: 720px; margin: 0 auto 6px; }
+
+  @media (max-width: 720px) {
+    .nav { flex-direction: column; }
+    .row { padding: 14px 14px; font-size: .9rem; }
+  }
+
+  /* NAV tweaks */
+  nav ul { gap: 16px; }
+
+  /* HOME */
+  .section-title { text-align: center; margin-top: 30px; }
+  .section-title h2 { font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 800; text-shadow: 0 0 24px rgba(255, 26, 46, .6); }
+  .section-title p { color: var(--muted); font-size: .85rem; margin-top: 6px; }
+  .hero .sub { font-size: .95rem; }
+  .watch { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; text-align: left; }
+  .watch i {
+    width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+    background: rgba(124, 77, 255, .35); font-style: normal;
+  }
+  .watch b { display: block; font-size: .85rem; }
+  .watch small { color: var(--muted); font-size: .7rem; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 26px; }
+  .card {
+    background: var(--panel); border: 1px solid rgba(124, 77, 255, .25); border-radius: 12px;
+    padding: 22px 18px 18px; text-align: center; display: flex; flex-direction: column; gap: 10px;
+  }
+  .brand { font-size: 1.9rem; font-weight: 800; letter-spacing: -.5px; }
+  .brand.gamba { color: #2bd66f; }
+  .brand.skins { color: #ffb020; }
+  .card h3 { font-size: 1.05rem; }
+  .card .site { color: #8f7dff; font-size: .75rem; }
+  .info { border: 1px solid rgba(124, 77, 255, .3); border-radius: 6px; padding: 12px; font-size: .8rem; font-weight: 600; background: rgba(8, 4, 30, .5); }
+  .info small { display: block; color: var(--muted); font-size: .65rem; margin-bottom: 3px; }
+  .card .btn { padding: 12px 20px; font-size: .85rem; margin-top: auto; }
+  hr.sep { border: 0; border-top: 1px solid rgba(255, 255, 255, .12); margin: 50px 0 10px; }
+  .list { margin-top: 26px; display: grid; gap: 10px; }
+  .item {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; align-items: center;
+    background: var(--panel); border: 1px solid rgba(124, 77, 255, .25); border-radius: 10px; padding: 14px 18px;
+  }
+  .item .left { display: flex; align-items: center; gap: 22px; }
+  .item .left .brand { font-size: 1.4rem; min-width: 110px; text-align: center; }
+  .item .left b { display: block; }
+  .item .left small { color: #8f7dff; font-size: .75rem; }
+  .claim-box {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    border: 1px solid rgba(124, 77, 255, .45); border-radius: 10px; padding: 10px 12px 10px 16px;
+    background: rgba(8, 4, 30, .5); font-weight: 600; font-size: .9rem;
+  }
+  .pill {
+    background: var(--accent); color: #fff; text-decoration: none; font-weight: 700; font-size: .8rem;
+    padding: 8px 26px; border-radius: 999px;
+  }
+  .pill:hover { background: var(--accent-hover); }
+  .pill.gold { background: linear-gradient(90deg, #b8932f, #e6c85a); color: #1a1200; }
+  @media (max-width: 720px) {
+    .item { grid-template-columns: 1fr; }
+    .item .left { gap: 12px; }
+  }
+
+  .page { display: none; }
+  .page.show { display: block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="#home">revvongambles</a>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="https://daddyskins.com/en/promo-code/Revv" target="_blank" rel="noopener sponsored">DaddySkins</a></li>
+        <li><a href="https://gamba.com/?c=Revv" target="_blank" rel="noopener sponsored">Gamba</a></li>
+        <li><a href="#home">Leaderboard</a></li>
+        <li><a href="#vip">VIP Rewards</a></li>
+        <li><a href="#home">Challenges</a></li>
+        <li><a href="#home">Videos</a></li>
+        <li><a href="https://kick.com/revvongambles" target="_blank" rel="noopener">Stream</a></li>
+        <li><a href="https://discord.gg/revvongambles" target="_blank" rel="noopener">Discord</a></li>
+      </ul>
+    </nav>
+    <div class="socials">
+      <a href="https://kick.com/revvongambles" target="_blank" rel="noopener">Kick</a>
+      <a href="https://x.com/RevvOnGambles" target="_blank" rel="noopener">X</a>
+      <a href="https://instagram.com/revvongambles" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HOME ================= -->
+<main id="home" class="page show">
+  <section class="hero">
+    <h1>Claim Bonuses &amp; Rewards</h1>
+    <p class="sub">Welcome to revvongambles. Use code <b>REVV</b> and claim exclusive bonuses!</p>
+    <div class="btns">
+      <a class="btn" href="#home" data-scroll="rewards">Explore Rewards</a>
+      <a class="watch" href="https://kick.com/revvongambles" target="_blank" rel="noopener">
+        <i>&#9654;</i><span><b>Watch on Kick</b><small>Live streams</small></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="wrap" id="bonuses">
+    <div class="section-title">
+      <h2>Bonuses</h2>
+      <p>Claim exclusive bonuses with code REVV</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <div class="brand skins">DaddySkins</div>
+        <h3>Promo Code Bonus</h3>
+        <span class="site">daddyskins.com</span>
+        <div class="info">Use code REVV</div>
+        <div class="info"><small>Extra Rewards</small>Rewards &amp; Bonuses</div>
+        <a class="btn" href="https://daddyskins.com/en/promo-code/Revv" target="_blank" rel="noopener sponsored">Claim Bonus</a>
+      </article>
+      <article class="card">
+        <div class="brand gamba">Gamba</div>
+        <h3>Promo Code Bonus</h3>
+        <span class="site">gamba.com</span>
+        <div class="info">Use code REVV</div>
+        <div class="info"><small>Extra Rewards</small>Rewards &amp; Bonuses</div>
+        <a class="btn" href="https://gamba.com/?c=Revv" target="_blank" rel="noopener sponsored">Claim Bonus</a>
+      </article>
+      <article class="card">
+        <div class="brand">VIP</div>
+        <h3>VIP Rewards</h3>
+        <span class="site">revvongambles</span>
+        <div class="info">Claim VIP rewards as you wager</div>
+        <div class="info"><small>Extra Rewards</small>Rewards by level</div>
+        <a class="btn" href="#vip">View Rewards</a>
+      </article>
+    </div>
+
+    <hr class="sep">
+
+    <div class="section-title" id="rewards">
+      <h2>Rewards</h2>
+      <p>Claim exclusive rewards from revvongambles&rsquo; top rated sites</p>
+    </div>
+    <div class="list">
+      <div class="item">
+        <div class="left"><div class="brand skins">DaddySkins</div><div><b>DaddySkins</b><small>daddyskins.com</small></div></div>
+        <div class="claim-box"><span>Exclusive offers &amp; rewards</span><a class="pill gold" href="https://daddyskins.com/en/promo-code/Revv" target="_blank" rel="noopener sponsored">Claim</a></div>
+      </div>
+      <div class="item">
+        <div class="left"><div class="brand gamba">Gamba</div><div><b>Gamba</b><small>gamba.com</small></div></div>
+        <div class="claim-box"><span>Exclusive offers &amp; rewards</span><a class="pill" href="https://gamba.com/?c=Revv" target="_blank" rel="noopener sponsored">Claim</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= VIP REWARDS ================= -->
+<main id="vip" class="page">
+  <section class="hero">
+    <h1>VIP Rewards</h1>
+    <p>Receive exclusive VIP rewards when you sign up with my code.</p>
+    <div class="code-box">
+      <span>Code: <b id="code">REVV</b></span>
+      <button id="copy" type="button">Copy</button>
+    </div>
+    <div class="btns">
+      <a class="btn" href="https://daddyskins.com/en/promo-code/Revv" target="_blank" rel="noopener sponsored">Sign Up</a>
+      <a class="btn" href="https://discord.gg/revvongambles" target="_blank" rel="noopener">Contact us</a>
+    </div>
+  </section>
+
+  <section class="wrap" aria-label="VIP levels">
+    <div class="row head"><span>VIP Level</span><span>Wager required</span><span>Prize</span></div>
+    <div class="row"><span class="level">Bronze</span><span class="wager">$10k</span><span class="prize">$15</span></div>
+    <div class="row"><span class="level">Silver</span><span class="wager">$50k</span><span class="prize">$30</span></div>
+    <div class="row"><span class="level">Gold</span><span class="wager">$100k</span><span class="prize">$50</span></div>
+    <div class="row"><span class="level">Platinum 1</span><span class="wager">$250k</span><span class="prize">$100+</span></div>
+    <div class="row"><span class="level">Platinum 2</span><span class="wager">$500k</span><span class="prize">$150+</span></div>
+    <div class="row"><span class="level">Platinum 3</span><span class="wager">$1m</span><span class="prize">$300+</span></div>
+    <div class="row"><span class="level">Platinum 4</span><span class="wager">$2.5m</span><span class="prize">$450+</span></div>
+    <div class="row"><span class="level">Platinum 5</span><span class="wager">$5m</span><span class="prize">$750+</span></div>
+    <!-- Copy a row above to add more levels -->
+  </section>
+</main>
+
+<footer>
+  <p>18+ only. Gambling involves risk and you can lose money. Play responsibly and only with money you can afford to lose.</p>
+  <p>This page contains affiliate links. I may earn a commission when you sign up.</p>
+  <p>&copy; <span id="year"></span> revvongambles</p>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Simple page switching: #home / #vip
+  function route() {
+    var page = location.hash === "#vip" ? "vip" : "home";
+    document.getElementById("home").classList.toggle("show", page === "home");
+    document.getElementById("vip").classList.toggle("show", page === "vip");
+    document.querySelectorAll("nav a").forEach(function (a) {
+      var h = a.getAttribute("href");
+      a.classList.toggle("active", h === "#" + page && a.textContent !== "Leaderboard" && a.textContent !== "Challenges" && a.textContent !== "Videos");
+    });
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener("hashchange", route);
+  route();
+
+  // Explore Rewards button scrolls to the rewards list
+  document.querySelectorAll("[data-scroll]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById(a.dataset.scroll).scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  // Copy code button
+  var copy = document.getElementById("copy");
+  if (copy) copy.addEventListener("click", function () {
+    var btn = this, text = document.getElementById("code").textContent;
+    var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1500); };
+    if (navigator.clipboard) { navigator.clipboard.writeText(text).then(done); } else { done(); }
+  });
+</script>
+</body>
+</html>
